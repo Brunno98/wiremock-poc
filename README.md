@@ -6,7 +6,7 @@ Projeto para aprender e testar algumas funcionalidades do [Wiremock](https://wir
 - [x] Rodar com docker
 - [x] Rodar com docker-compose
     - [x] passar os mappings para dentro do container para inicar já com as rotas desejadas
-- [ ] Criar rotas com o record (proxy)
+- [x] Criar rotas com o record (proxy)
 
 ### Utilidades:
 - plugin Intelij https://plugins.jetbrains.com/plugin/18860-wiremocha
@@ -42,3 +42,49 @@ Os stubs são arquivos json que ficam na pasta (mappings)[mappings/] e que devem
 
 
 Para saber mais, acesse a [documentação dos stubbings](https://wiremock.org/docs/stubbing/)
+
+## Recorder
+
+O recorder pode ser usado para gerar stubs a partir de requisições reais.  
+Quando o recorder está ativo, o wiremock funciona como um proxy e vai gravar toda request e response que passar
+por ele. Quando o recorder for finalizado, serão gerados arquivos de stub de cada request feita e que podem ser
+usados futuramente.
+Os stubs gerados são salvos na pasta mappings.
+
+### Iniciando o recorder
+
+O recorder pode ser iniciado acessando a UI localizada no path `/__admin/recorder` ou fazendo a seguinte requisição:
+```shell
+curl --location 'localhost:8080/__admin/recordings/start' \
+--header 'Content-Type: application/json' \
+--data '{
+    "targetBaseUrl": "http://example.mocklab.io",
+    "filters": {
+        "urlPathPattern": "/api/.*",
+        "method": "GET"
+    },
+    "captureHeaders": {
+        "Accept": {},
+        "Content-Type": {
+            "caseInsensitive": true
+        }
+    },
+    "requestBodyPattern": {
+        "matcher": "equalToJson",
+        "ignoreArrayOrder": false,
+        "ignoreExtraElements": true
+    },
+    "extractBodyCriteria": {
+        "textSizeThreshold": "2048",
+        "binarySizeThreshold": "10240"
+    },
+    "persist": false,
+    "repeatsAsScenarios": false,
+    "transformers": [
+        "modify-response-header"
+    ],
+    "transformerParameters": {
+        "headerValue": "123"
+    }
+}'
+```

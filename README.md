@@ -4,8 +4,8 @@ Projeto para aprender e testar algumas funcionalidades do [Wiremock](https://wir
 
 ### Funcionalidades:
 - [x] Rodar com docker
-- [ ] Rodar com docker-compose
-    - [ ] passar os mappings para dentro do container para inicar já com as rotas desejadas
+- [x] Rodar com docker-compose
+    - [x] passar os mappings para dentro do container para inicar já com as rotas desejadas
 - [ ] Criar rotas com o record (proxy)
 
 ### Utilidades:
@@ -30,3 +30,15 @@ docker run -it --rm \
 após isso, basta acessar a url http://localhost:8080/__admin/mappings para ver as rotas configuradas.
 
 Acessar a [documentação da API de admin](https://wiremock.org/docs/standalone/admin-api-reference) para fazer as configurações de mappings
+
+
+## Rodar com docker compose
+
+A partir do arquivo [compose.yml](compose.yml), basta rodar o comando `docker compose up -d` para subir o container do wiremock
+
+### Definindo os stubs com arquivos
+
+Os stubs são arquivos json que ficam na pasta (mappings)[mappings/] e que devem ser copiados para a pasta `/home/wiremock/mappings` do container.
+
+
+Para saber mais, acesse a [documentação dos stubbings](https://wiremock.org/docs/stubbing/)

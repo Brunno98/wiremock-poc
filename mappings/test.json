@@ -1,0 +1,21 @@
+{
+    "id": "957745de-676b-4e81-b027-60daab943e14",
+    "name": "api_test",
+    "request": {
+        "url": "/api/test",
+        "method": "GET",
+        "headers": {
+            "Accept": {
+                "equalTo": "*/*"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "base64Body": "eyJ0ZXN0IjogIk9LIn0=",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    },
+    "uuid": "957745de-676b-4e81-b027-60daab943e14"
+}

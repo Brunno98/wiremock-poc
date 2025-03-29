@@ -88,3 +88,8 @@ curl --location 'localhost:8080/__admin/recordings/start' \
     }
 }'
 ```
+
+## Utilidades
+
+Algumas requests de test estão salvas na pasta [postman](postman/).  
+Para usa-las basta importar os arquivos `postman_collection` e `postman_environment` no postamn.
